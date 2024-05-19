@@ -50,10 +50,10 @@
       "distDir": "./dist/examples/multi-feature"
     }
   },
+  "main": "dist/enva.js",
+  "types": "dist/enva.d.ts",
   "source": "src/enva.ts",
-  "types": "dist/types.d.ts",
   "module": "dist/module.js",
-  "main": "dist/main.js",
   "author": "Tentone",
   "license": "MIT",
   "keywords": [
