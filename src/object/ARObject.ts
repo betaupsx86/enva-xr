@@ -1,4 +1,5 @@
-import {ARRenderer} from "../ARRenderer.ts";
+import {ARRenderer} from "../ARRenderer";
+import {XRFrame} from "three";
 
 /**
  * Interface to indicate that the object is an AR object.

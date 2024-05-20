@@ -1,4 +1,4 @@
-import {Vector2, WebGLRenderer, Scene, PerspectiveCamera, PCFSoftShadowMap, Object3D, ShadowMapType, Raycaster, Intersection} from "three";
+import {XRHitTestTrackableType, XRFrame, XRReferenceSpace, XRView, XRViewerPose, XRSession, XRHitTestSource, Object3D, Vector2, Scene, PerspectiveCamera, PCFSoftShadowMap, ShadowMapType, Raycaster, Intersection} from "three";
 import {XRDepthInformation, XRLightProbe} from "types.js";
 import {DepthDataTexture} from "./texture/DepthDataTexture";
 import {ARObject} from "./object/ARObject";
@@ -6,6 +6,17 @@ import {DepthCanvasTexture} from "./texture/DepthCanvasTexture";
 import {EventManager} from "./utils/EventManager";
 import {AugmentedMaterial} from "./material/AugmentedMaterial";
 import {ARRendererConfig} from "./ARRendererConfig";
+
+import { WebXRManager} from "three/src/renderers/webxr/WebXRManager";
+declare module "three/src/renderers/webxr/WebXRManager"  {
+	interface WebXRManager {
+		getBinding(): XRWebGLBinding|null;
+	}
+}
+
+import { WebGLRenderer } from "three";
+type XRWebGLBinding = any;
+
 
 /**
  * AR renderer is responsible for rendering the scene in AR environment.
@@ -151,7 +162,7 @@ export class ARRenderer
 
 	public constructor(config: ARRendererConfig = {})
 	{
-		if (!navigator.xr) 
+		if ('xr' in navigator == false) 
 		{
 			throw new Error("WebXR is not supported by the device/browser.");
 		}
@@ -265,8 +276,8 @@ export class ARRenderer
 		{
 			this.xrHitTestSource = await this.xrSession.requestHitTestSource({
 				space: await this.xrSession.requestReferenceSpace('viewer'),
-				entityTypes: ['plane', 'point', 'mesh'],
-				offsetRay: new XRRay()
+				entityTypes: [XRHitTestTrackableType.plane, XRHitTestTrackableType.point, XRHitTestTrackableType.mesh],
+				offsetRay: undefined
 			});
 
 			// console.log('enva-xr: XR hit test source', this.xrHitTestSource);
@@ -576,11 +587,15 @@ export class ARRenderer
 								if (!this.depthCanvasTexture) 
 								{
 									let canvas = null;
-									if (this.config.depthCanvasTexture === 'debug') {
-										canvas = this.createDebugCanvas(depthData);
-									} else {
-										canvas = new OffscreenCanvas(depthData.width, depthData.height);
-									}
+									canvas = this.createDebugCanvas(depthData);
+									// if (this.config.depthCanvasTexture === 'debug') 
+									// {
+									// 	canvas = this.createDebugCanvas(depthData);
+									// }
+									// else 
+									// {
+									// 	canvas = new OffscreenCanvas(depthData.width, depthData.height);
+									// }
 									
 									this.depthCanvasTexture = new DepthCanvasTexture(canvas);
 								}

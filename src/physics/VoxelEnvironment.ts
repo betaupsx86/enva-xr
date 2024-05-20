@@ -1,6 +1,6 @@
 import {Box3, Camera, Vector3} from "three";
 import {Vec3, Box, World} from "cannon-es";
-import {VoxelBody} from "./VoxelBody.ts";
+import {VoxelBody} from "./VoxelBody";
 
 export class VoxelEnvironment
 {

@@ -18,7 +18,8 @@ export class DepthCanvasTexture extends CanvasTexture
 	 */
 	public context: CanvasRenderingContext2D = null;
 
-	public constructor(canvas: HTMLCanvasElement | OffscreenCanvas)
+	// public constructor(canvas: HTMLCanvasElement | OffscreenCanvas)
+	public constructor(canvas: HTMLCanvasElement)
 	{
 		super(canvas);
 
@@ -76,7 +77,8 @@ export class DepthCanvasTexture extends CanvasTexture
 		// Get image data
 		if (!this.imageData) 
 		{
-			this.imageData = this.context.createImageData(depthData.width, depthData.height, {colorSpace: "srgb"});
+			// this.imageData = this.context.createImageData(depthData.width, depthData.height, {colorSpace: "srgb"});
+			this.imageData = this.context.createImageData(depthData.width, depthData.height);
 		}
 		
 		// Matrix to transform normalized coord into view coordinates

@@ -1,6 +1,6 @@
-import {Group} from "three";
-import {ARRenderer} from "../ARRenderer.ts";
-import {ARObject} from "./ARObject.ts";
+import {Group, XRFrame, XRHitResult, XRAnchor} from "three";
+import {ARRenderer} from "../ARRenderer";
+import {ARObject} from "./ARObject";
 
 /**
  * Archor groups can be used to attach (anchor) object to the real-world environment.

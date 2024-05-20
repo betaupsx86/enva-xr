@@ -1,22 +1,10 @@
-declare module "*.glsl" {
-	const value: string;
-	export default value;
-}
-
-declare module "*.vs" {
-	const value: string;
-	export default value;
-}
-
-declare module "*.fs" {
-	const value: string;
-	export default value;
-}
+export type XRWebGLBinding = any;
 
 export type XRLightProbe = any;
 
-
 export type XRDepthInformation = any;
+
+export type XRRigidTransform = any;
 
 export type XRCPUDepthInformation = {
 	data: ArrayBuffer,

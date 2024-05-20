@@ -1,7 +1,7 @@
-import {Mesh, MeshBasicMaterial, RingGeometry, CircleGeometry, BufferGeometry, Material, Matrix4} from "three";
+import {XRFrame, XRHitTestResult, Mesh, MeshBasicMaterial, RingGeometry, CircleGeometry, BufferGeometry, Material, Matrix4} from "three";
 import {mergeBufferGeometries} from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import {ARRenderer} from "../ARRenderer.ts";
-import {ARObject} from "./ARObject.ts";
+import {ARRenderer} from "../ARRenderer";
+import {ARObject} from "./ARObject";
 
 /**
  * Cursor is used to interfact with the environment.
@@ -12,7 +12,7 @@ import {ARObject} from "./ARObject.ts";
  */
 export class Cursor extends Mesh implements ARObject
 {
-	public isARObject = true;
+	public isARObject: boolean;
 
 	public constructor(geometry?: BufferGeometry, material?: Material)
 	{
@@ -31,6 +31,7 @@ export class Cursor extends Mesh implements ARObject
 		super(geometry, material);
 
 		this.visible = false;
+		this.isARObject =  true;
 	}
 	
 	public beforeARUpdate(renderer: ARRenderer, time: number, frame: XRFrame): void 

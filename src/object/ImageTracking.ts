@@ -1,6 +1,6 @@
-import {Group, Matrix4} from "three";
-import {ARRenderer} from "ARRenderer.ts";
-import {ARObject} from "./ARObject.ts";
+import {XRFrame,Group, Matrix4} from "three";
+import {ARRenderer} from "ARRenderer";
+import {ARObject} from "./ARObject";
 
 /**
  * Group of objects attached to image tracking.
@@ -34,7 +34,7 @@ export class ImageTracking extends Group implements ARObject
 			throw new Error("Renderer configuration must have 'imageTracking' enabled.");
 		}
         
-		if (this.index > renderer.config.imageTracking.length) 
+		if (this.index > (renderer.config.imageTracking as any[]).length) 
 		{
 			throw new Error("Image tracking target not available check the index of tracker group.");
 		}

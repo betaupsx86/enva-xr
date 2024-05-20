@@ -8,7 +8,7 @@ export class Measurement extends Line
 	/**
 	 * List of points that compose the measurement.
 	 */
-	public points: Vector3[] = [];
+	public points: Vector3[];
 
 	// /**
 	//  * Text used to display the measurement value.
@@ -70,14 +70,14 @@ export class Measurement extends Line
 	public updateGeometry(): void
 	{
 		// @ts-ignore
-		let positions = this.geometry.attributes.position.array;
-		positions[0] = this.points[0].x;
-		positions[1] = this.points[0].y;
-		positions[2] = this.points[0].z;
-
-		positions[3] = this.points[1].x;
-		positions[4] = this.points[1].y;
-		positions[5] = this.points[1].z;
+		let position = this.geometry.attributes.position;
+		position.setX(0, this.points[0].x);
+		position.setX(0, this.points[0].y);
+		position.setX(0, this.points[0].z);
+		
+		position.setX(3, this.points[1].x);
+		position.setX(4, this.points[1].y);
+		position.setX(5, this.points[1].z);
 
 		this.geometry.attributes.position.needsUpdate = true;
 		this.geometry.computeBoundingSphere();

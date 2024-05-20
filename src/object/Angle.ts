@@ -54,20 +54,20 @@ export class Angle extends Line
 	public updateGeometry(): void
 	{
 		// @ts-ignore
-		let positions = this.geometry.attributes.position.array;
-		positions[0] = this.points[0].x;
-		positions[1] = this.points[0].y;
-		positions[2] = this.points[0].z;
+		let position = this.geometry.attributes.position;
+		position.setX(0, this.points[0].x);
+		position.setX(0, this.points[0].y);
+		position.setX(0, this.points[0].z);
 
 		let a = this.points.length > 1 ? 1 : 0;
-		positions[3] = this.points[a].x;
-		positions[4] = this.points[a].y;
-		positions[5] = this.points[a].z;
+		position.setX(3, this.points[a].x);
+		position.setX(4, this.points[a].y);
+		position.setX(5, this.points[a].z);
 
 		let b = this.points.length > 2 ? 2 : a;
-		positions[6] = this.points[b].x;
-		positions[7] = this.points[b].y;
-		positions[8] = this.points[b].z;
+		position.setX(6, this.points[b].x);
+		position.setX(7, this.points[b].y);
+		position.setX(8, this.points[b].z);
 
 		this.geometry.attributes.position.needsUpdate = true;
 		this.geometry.computeBoundingSphere();
